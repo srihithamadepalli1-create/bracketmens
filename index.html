@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <title>2026 NCAA Men's Sweet 16 Bracket</title>
 <style>
+    :root {
+        --ncaa-blue: #0072CE;
+        --ncaa-dark: #003366;
+        --bg-light: #f8faff;
+    }
+
     body {
         font-family: Arial, sans-serif;
         background: #ffffff;
@@ -14,38 +20,51 @@
     }
 
     .bracket-container {
-        width: 980px; /* W‑3 medium width */
+        width: 980px; /* W-3 medium width */
         margin: auto;
     }
 
     h1 {
         text-align: center;
-        color: #003366;
-        font-size: 32px;
+        color: var(--ncaa-dark);
+        font-size: 30px;
         margin-bottom: 25px;
         font-weight: 900;
     }
 
-    .round {
+    .grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        margin-bottom: 40px;
+        grid-template-columns: 1.2fr 1.2fr 1.2fr 1.2fr 1.4fr;
+        column-gap: 20px;
+        align-items: center;
+    }
+
+    .round-label {
+        text-align: center;
+        font-weight: 700;
+        color: var(--ncaa-dark);
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .column {
+        position: relative;
     }
 
     .matchup {
-        margin: 25px 0;
+        margin: 22px 0;
         position: relative;
     }
 
     .team {
-        padding: 8px 12px;
-        border: 2px solid #0072CE;
+        padding: 7px 10px;
+        border: 2px solid var(--ncaa-blue);
         border-radius: 6px;
-        margin: 6px 0;
+        margin: 5px 0;
         cursor: pointer;
-        background: #f8faff;
+        background: var(--bg-light);
         transition: 0.15s;
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .team:hover {
@@ -58,176 +77,245 @@
     }
 
     .slot {
-        padding: 8px 12px;
-        border: 2px dashed #0072CE;
+        padding: 7px 10px;
+        border: 2px dashed var(--ncaa-blue);
         border-radius: 6px;
-        background: #f8faff;
-        font-weight: bold;
-        margin: 10px 0;
+        background: var(--bg-light);
+        margin: 5px 0;
+        font-size: 14px;
+        cursor: pointer;
         text-align: center;
     }
 
-    /* ESPN A‑2 Modern Lines */
+    .slot.placeholder {
+        color: #777;
+        font-style: italic;
+    }
+
+    /* Lines (A-2 modern, medium thickness) */
     .line {
         position: absolute;
         height: 2px;
-        background: #0072CE;
-        width: 70px;
+        background: var(--ncaa-blue);
+    }
+
+    .line-horizontal {
+        width: 60px;
         top: 50%;
         transform: translateY(-50%);
     }
 
-    .line-right { right: -70px; }
-    .line-left { left: -70px; }
+    .line-right { right: -60px; }
+    .line-left { left: -60px; }
 
-    /* Center Column */
     .center {
         text-align: center;
-        margin-top: 40px;
+        margin-top: 30px;
     }
 
     #champion {
-        margin-top: 20px;
-        padding: 12px 16px;
-        border: 3px solid #0072CE;
+        margin-top: 15px;
+        padding: 10px 14px;
+        border: 3px solid var(--ncaa-blue);
         border-radius: 8px;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 900;
         display: inline-block;
         background: #f0f7ff;
+        color: var(--ncaa-dark);
     }
 </style>
 </head>
 <body>
 
 <div class="bracket-container">
+    <h1>2026 NCAA Men's Sweet 16 Bracket</h1>
 
-<h1>2026 NCAA Men's Sweet 16 Bracket</h1>
+    <div class="grid">
+        <!-- LEFT SWEET 16 -->
+        <div class="column">
+            <div class="round-label">Sweet 16</div>
 
-<!-- SWEET 16 -->
-<div class="round">
+            <div class="matchup" data-next-a="E8_L1_A" data-next-b="E8_L1_B">
+                <div class="team" onclick="pick(this)">(2) Purdue</div>
+                <div class="team" onclick="pick(this)">(11) Texas</div>
+                <div class="line line-horizontal line-right"></div>
+            </div>
 
-    <!-- LEFT SWEET 16 -->
-    <div>
-        <div class="matchup" data-next="E8_L1">
-            <div class="team" onclick="pick(this)">(2) Purdue</div>
-            <div class="team" onclick="pick(this)">(11) Texas</div>
-            <div class="line line-right"></div>
+            <div class="matchup" data-next-a="E8_L1_A" data-next-b="E8_L1_B">
+                <div class="team" onclick="pick(this)">(1) Arizona</div>
+                <div class="team" onclick="pick(this)">(4) Arkansas</div>
+                <div class="line line-horizontal line-right"></div>
+            </div>
+
+            <div class="matchup" data-next-a="E8_L2_A" data-next-b="E8_L2_B">
+                <div class="team" onclick="pick(this)">(4) Nebraska</div>
+                <div class="team" onclick="pick(this)">(9) Iowa</div>
+                <div class="line line-horizontal line-right"></div>
+            </div>
+
+            <div class="matchup" data-next-a="E8_L2_A" data-next-b="E8_L2_B">
+                <div class="team" onclick="pick(this)">(2) Houston</div>
+                <div class="team" onclick="pick(this)">(3) Illinois</div>
+                <div class="line line-horizontal line-right"></div>
+            </div>
         </div>
 
-        <div class="matchup" data-next="E8_L1">
-            <div class="team" onclick="pick(this)">(1) Arizona</div>
-            <div class="team" onclick="pick(this)">(4) Arkansas</div>
-            <div class="line line-right"></div>
+        <!-- LEFT ELITE 8 -->
+        <div class="column">
+            <div class="round-label">Elite 8</div>
+
+            <div class="matchup" data-next-a="FF_L_A" data-next-b="FF_L_B">
+                <div class="slot placeholder" id="E8_L1_A" onclick="pickFromSlot(this)">Elite 8 Left 1A</div>
+                <div class="slot placeholder" id="E8_L1_B" onclick="pickFromSlot(this)">Elite 8 Left 1B</div>
+                <div class="line line-horizontal line-right"></div>
+            </div>
+
+            <div class="matchup" data-next-a="FF_L_A" data-next-b="FF_L_B">
+                <div class="slot placeholder" id="E8_L2_A" onclick="pickFromSlot(this)">Elite 8 Left 2A</div>
+                <div class="slot placeholder" id="E8_L2_B" onclick="pickFromSlot(this)">Elite 8 Left 2B</div>
+                <div class="line line-horizontal line-right"></div>
+            </div>
         </div>
 
-        <div class="matchup" data-next="E8_L2">
-            <div class="team" onclick="pick(this)">(4) Nebraska</div>
-            <div class="team" onclick="pick(this)">(9) Iowa</div>
-            <div class="line line-right"></div>
+        <!-- FINAL FOUR -->
+        <div class="column">
+            <div class="round-label">Final Four</div>
+
+            <div class="matchup" data-next-a="FINAL_A" data-next-b="FINAL_B">
+                <div class="slot placeholder" id="FF_L_A" onclick="pickFromSlot(this)">Final Four Left A</div>
+                <div class="slot placeholder" id="FF_L_B" onclick="pickFromSlot(this)">Final Four Left B</div>
+                <div class="line line-horizontal line-right"></div>
+            </div>
+
+            <div class="matchup" data-next-a="FINAL_A" data-next-b="FINAL_B">
+                <div class="slot placeholder" id="FF_R_A" onclick="pickFromSlot(this)">Final Four Right A</div>
+                <div class="slot placeholder" id="FF_R_B" onclick="pickFromSlot(this)">Final Four Right B</div>
+                <div class="line line-horizontal line-left"></div>
+            </div>
         </div>
 
-        <div class="matchup" data-next="E8_L2">
-            <div class="team" onclick="pick(this)">(2) Houston</div>
-            <div class="team" onclick="pick(this)">(3) Illinois</div>
-            <div class="line line-right"></div>
+        <!-- RIGHT ELITE 8 -->
+        <div class="column">
+            <div class="round-label">Elite 8</div>
+
+            <div class="matchup" data-next-a="FF_R_A" data-next-b="FF_R_B">
+                <div class="slot placeholder" id="E8_R1_A" onclick="pickFromSlot(this)">Elite 8 Right 1A</div>
+                <div class="slot placeholder" id="E8_R1_B" onclick="pickFromSlot(this)">Elite 8 Right 1B</div>
+                <div class="line line-horizontal line-left"></div>
+            </div>
+
+            <div class="matchup" data-next-a="FF_R_A" data-next-b="FF_R_B">
+                <div class="slot placeholder" id="E8_R2_A" onclick="pickFromSlot(this)">Elite 8 Right 2A</div>
+                <div class="slot placeholder" id="E8_R2_B" onclick="pickFromSlot(this)">Elite 8 Right 2B</div>
+                <div class="line line-horizontal line-left"></div>
+            </div>
+        </div>
+
+        <!-- RIGHT SWEET 16 -->
+        <div class="column">
+            <div class="round-label">Sweet 16</div>
+
+            <div class="matchup" data-next-a="E8_R1_A" data-next-b="E8_R1_B">
+                <div class="team" onclick="pick(this)">(1) Duke</div>
+                <div class="team" onclick="pick(this)">(5) St. John's</div>
+                <div class="line line-horizontal line-left"></div>
+            </div>
+
+            <div class="matchup" data-next-a="E8_R1_A" data-next-b="E8_R1_B">
+                <div class="team" onclick="pick(this)">(2) UConn</div>
+                <div class="team" onclick="pick(this)">(3) Michigan State</div>
+                <div class="line line-horizontal line-left"></div>
+            </div>
+
+            <div class="matchup" data-next-a="E8_R2_A" data-next-b="E8_R2_B">
+                <div class="team" onclick="pick(this)">(1) Michigan</div>
+                <div class="team" onclick="pick(this)">(4) Alabama</div>
+                <div class="line line-horizontal line-left"></div>
+            </div>
+
+            <div class="matchup" data-next-a="E8_R2_A" data-next-b="E8_R2_B">
+                <div class="team" onclick="pick(this)">(2) Iowa State</div>
+                <div class="team" onclick="pick(this)">(6) Tennessee</div>
+                <div class="line line-horizontal line-left"></div>
+            </div>
         </div>
     </div>
 
-    <!-- RIGHT SWEET 16 -->
-    <div>
-        <div class="matchup" data-next="E8_R1">
-            <div class="team" onclick="pick(this)">(1) Duke</div>
-            <div class="team" onclick="pick(this)">(5) St. John's</div>
-            <div class="line line-left"></div>
+    <!-- CHAMPIONSHIP -->
+    <div class="center" style="margin-top: 35px;">
+        <div class="round-label">Championship</div>
+        <div class="matchup" data-next-a="CHAMP" data-next-b="CHAMP">
+            <div class="slot placeholder" id="FINAL_A" onclick="pickFromSlot(this)">Finalist A</div>
+            <div class="slot placeholder" id="FINAL_B" onclick="pickFromSlot(this)">Finalist B</div>
         </div>
-
-        <div class="matchup" data-next="E8_R1">
-            <div class="team" onclick="pick(this)">(2) UConn</div>
-            <div class="team" onclick="pick(this)">(3) Michigan State</div>
-            <div class="line line-left"></div>
-        </div>
-
-        <div class="matchup" data-next="E8_R2">
-            <div class="team" onclick="pick(this)">(1) Michigan</div>
-            <div class="team" onclick="pick(this)">(4) Alabama</div>
-            <div class="line line-left"></div>
-        </div>
-
-        <div class="matchup" data-next="E8_R2">
-            <div class="team" onclick="pick(this)">(2) Iowa State</div>
-            <div class="team" onclick="pick(this)">(6) Tennessee</div>
-            <div class="line line-left"></div>
-        </div>
+        <div id="champion">Click through the bracket to pick a champion</div>
     </div>
-
-</div>
-
-<!-- ELITE 8 -->
-<div class="round">
-
-    <div>
-        <div class="slot" id="E8_L1">Elite 8 (Left 1)</div>
-        <div class="slot" id="E8_L2">Elite 8 (Left 2)</div>
-    </div>
-
-    <div>
-        <div class="slot" id="E8_R1">Elite 8 (Right 1)</div>
-        <div class="slot" id="E8_R2">Elite 8 (Right 2)</div>
-    </div>
-
-</div>
-
-<!-- FINAL FOUR -->
-<div class="round">
-
-    <div>
-        <div class="slot" id="FF_L">Final Four (Left)</div>
-    </div>
-
-    <div>
-        <div class="slot" id="FF_R">Final Four (Right)</div>
-    </div>
-
-</div>
-
-<!-- CHAMPIONSHIP -->
-<div class="center">
-    <div class="slot" id="FINAL">Championship</div>
-    <div id="champion">Click teams to advance</div>
-</div>
-
 </div>
 
 <script>
+function clearSelectionInMatch(match) {
+    match.querySelectorAll('.team, .slot').forEach(el => el.classList.remove('selected'));
+}
+
+function setSlotText(id, text) {
+    const slot = document.getElementById(id);
+    slot.textContent = text;
+    slot.classList.remove('placeholder');
+}
+
 function pick(el) {
+    // Sweet 16 click
     const match = el.parentNode;
-    const teams = match.querySelectorAll('.team');
-    teams.forEach(t => t.classList.remove('selected'));
+    clearSelectionInMatch(match);
     el.classList.add('selected');
 
-    const next = match.getAttribute('data-next');
-    document.getElementById(next).textContent = el.textContent;
+    const nextA = match.getAttribute('data-next-a');
+    const nextB = match.getAttribute('data-next-b');
 
-    const L1 = document.getElementById("E8_L1").textContent;
-    const L2 = document.getElementById("E8_L2").textContent;
-    const R1 = document.getElementById("E8_R1").textContent;
-    const R2 = document.getElementById("E8_R2").textContent;
+    // If first slot is still placeholder, fill A, else fill B
+    const slotA = document.getElementById(nextA);
+    const slotB = document.getElementById(nextB);
 
-    if (!L1.includes("Elite") && !L2.includes("Elite"))
-        document.getElementById("FF_L").textContent = L1 + " vs " + L2;
+    if (slotA.classList.contains('placeholder')) {
+        setSlotText(nextA, el.textContent);
+    } else {
+        setSlotText(nextB, el.textContent);
+    }
+}
 
-    if (!R1.includes("Elite") && !R2.includes("Elite"))
-        document.getElementById("FF_R").textContent = R1 + " vs " + R2;
+function pickFromSlot(el) {
+    // Clicking in Elite 8, Final Four, or Final
+    const match = el.parentNode;
+    clearSelectionInMatch(match);
+    el.classList.add('selected');
 
-    const FF_L = document.getElementById("FF_L").textContent;
-    const FF_R = document.getElementById("FF_R").textContent;
+    const nextA = match.getAttribute('data-next-a');
+    const nextB = match.getAttribute('data-next-b');
 
-    if (!FF_L.includes("Final") && !FF_R.includes("Final"))
-        document.getElementById("FINAL").textContent = FF_L + " vs " + FF_R;
+    if (!nextA || !nextB) return;
 
-    if (document.getElementById("FINAL").textContent.includes(el.textContent))
+    const slotA = document.getElementById(nextA);
+    const slotB = document.getElementById(nextB);
+
+    if (!slotA || !slotB) {
+        // Championship
+        if (nextA === "CHAMP") {
+            document.getElementById("champion").textContent = el.textContent + " — Champion";
+        }
+        return;
+    }
+
+    if (slotA.classList.contains('placeholder')) {
+        setSlotText(nextA, el.textContent);
+    } else {
+        setSlotText(nextB, el.textContent);
+    }
+
+    // If we just set CHAMP slots, update champion when clicked
+    if (nextA === "CHAMP" || nextB === "CHAMP") {
         document.getElementById("champion").textContent = el.textContent + " — Champion";
+    }
 }
 </script>
 
