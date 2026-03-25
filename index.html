@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>2026 NCAA Men's Sweet 16 Bracket</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .bracket-container {
+        width: 980px; /* W‑3 medium width */
+        margin: auto;
+    }
+
+    h1 {
+        text-align: center;
+        color: #003366;
+        font-size: 32px;
+        margin-bottom: 25px;
+        font-weight: 900;
+    }
+
+    .round {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 40px;
+    }
+
+    .matchup {
+        margin: 25px 0;
+        position: relative;
+    }
+
+    .team {
+        padding: 8px 12px;
+        border: 2px solid #0072CE;
+        border-radius: 6px;
+        margin: 6px 0;
+        cursor: pointer;
+        background: #f8faff;
+        transition: 0.15s;
+        font-size: 15px;
+    }
+
+    .team:hover {
+        background: #e3f0ff;
+    }
+
+    .selected {
+        background: #cfe4ff;
+        border-color: #005bb5;
+    }
+
+    .slot {
+        padding: 8px 12px;
+        border: 2px dashed #0072CE;
+        border-radius: 6px;
+        background: #f8faff;
+        font-weight: bold;
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    /* ESPN A‑2 Modern Lines */
+    .line {
+        position: absolute;
+        height: 2px;
+        background: #0072CE;
+        width: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .line-right { right: -70px; }
+    .line-left { left: -70px; }
+
+    /* Center Column */
+    .center {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    #champion {
+        margin-top: 20px;
+        padding: 12px 16px;
+        border: 3px solid #0072CE;
+        border-radius: 8px;
+        font-size: 20px;
+        font-weight: 900;
+        display: inline-block;
+        background: #f0f7ff;
+    }
+</style>
+</head>
+<body>
+
+<div class="bracket-container">
+
+<h1>2026 NCAA Men's Sweet 16 Bracket</h1>
+
+<!-- SWEET 16 -->
+<div class="round">
+
+    <!-- LEFT SWEET 16 -->
+    <div>
+        <div class="matchup" data-next="E8_L1">
+            <div class="team" onclick="pick(this)">(2) Purdue</div>
+            <div class="team" onclick="pick(this)">(11) Texas</div>
+            <div class="line line-right"></div>
+        </div>
+
+        <div class="matchup" data-next="E8_L1">
+            <div class="team" onclick="pick(this)">(1) Arizona</div>
+            <div class="team" onclick="pick(this)">(4) Arkansas</div>
+            <div class="line line-right"></div>
+        </div>
+
+        <div class="matchup" data-next="E8_L2">
+            <div class="team" onclick="pick(this)">(4) Nebraska</div>
+            <div class="team" onclick="pick(this)">(9) Iowa</div>
+            <div class="line line-right"></div>
+        </div>
+
+        <div class="matchup" data-next="E8_L2">
+            <div class="team" onclick="pick(this)">(2) Houston</div>
+            <div class="team" onclick="pick(this)">(3) Illinois</div>
+            <div class="line line-right"></div>
+        </div>
+    </div>
+
+    <!-- RIGHT SWEET 16 -->
+    <div>
+        <div class="matchup" data-next="E8_R1">
+            <div class="team" onclick="pick(this)">(1) Duke</div>
+            <div class="team" onclick="pick(this)">(5) St. John's</div>
+            <div class="line line-left"></div>
+        </div>
+
+        <div class="matchup" data-next="E8_R1">
+            <div class="team" onclick="pick(this)">(2) UConn</div>
+            <div class="team" onclick="pick(this)">(3) Michigan State</div>
+            <div class="line line-left"></div>
+        </div>
+
+        <div class="matchup" data-next="E8_R2">
+            <div class="team" onclick="pick(this)">(1) Michigan</div>
+            <div class="team" onclick="pick(this)">(4) Alabama</div>
+            <div class="line line-left"></div>
+        </div>
+
+        <div class="matchup" data-next="E8_R2">
+            <div class="team" onclick="pick(this)">(2) Iowa State</div>
+            <div class="team" onclick="pick(this)">(6) Tennessee</div>
+            <div class="line line-left"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ELITE 8 -->
+<div class="round">
+
+    <div>
+        <div class="slot" id="E8_L1">Elite 8 (Left 1)</div>
+        <div class="slot" id="E8_L2">Elite 8 (Left 2)</div>
+    </div>
+
+    <div>
+        <div class="slot" id="E8_R1">Elite 8 (Right 1)</div>
+        <div class="slot" id="E8_R2">Elite 8 (Right 2)</div>
+    </div>
+
+</div>
+
+<!-- FINAL FOUR -->
+<div class="round">
+
+    <div>
+        <div class="slot" id="FF_L">Final Four (Left)</div>
+    </div>
+
+    <div>
+        <div class="slot" id="FF_R">Final Four (Right)</div>
+    </div>
+
+</div>
+
+<!-- CHAMPIONSHIP -->
+<div class="center">
+    <div class="slot" id="FINAL">Championship</div>
+    <div id="champion">Click teams to advance</div>
+</div>
+
+</div>
+
+<script>
+function pick(el) {
+    const match = el.parentNode;
+    const teams = match.querySelectorAll('.team');
+    teams.forEach(t => t.classList.remove('selected'));
+    el.classList.add('selected');
+
+    const next = match.getAttribute('data-next');
+    document.getElementById(next).textContent = el.textContent;
+
+    const L1 = document.getElementById("E8_L1").textContent;
+    const L2 = document.getElementById("E8_L2").textContent;
+    const R1 = document.getElementById("E8_R1").textContent;
+    const R2 = document.getElementById("E8_R2").textContent;
+
+    if (!L1.includes("Elite") && !L2.includes("Elite"))
+        document.getElementById("FF_L").textContent = L1 + " vs " + L2;
+
+    if (!R1.includes("Elite") && !R2.includes("Elite"))
+        document.getElementById("FF_R").textContent = R1 + " vs " + R2;
+
+    const FF_L = document.getElementById("FF_L").textContent;
+    const FF_R = document.getElementById("FF_R").textContent;
+
+    if (!FF_L.includes("Final") && !FF_R.includes("Final"))
+        document.getElementById("FINAL").textContent = FF_L + " vs " + FF_R;
+
+    if (document.getElementById("FINAL").textContent.includes(el.textContent))
+        document.getElementById("champion").textContent = el.textContent + " — Champion";
+}
+</script>
+
+</body>
+</html>
